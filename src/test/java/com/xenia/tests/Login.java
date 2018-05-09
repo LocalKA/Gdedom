@@ -1,13 +1,11 @@
 package com.xenia.tests;
 
-import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 public class Login {
   private WebDriver driver;
@@ -28,13 +26,18 @@ public class Login {
     driver.findElement(By.xpath("//div[@id='menu-block']/div/div/div/ul/li[3]/a/span/span")).click();
     driver.findElement(By.xpath("//button[@type='submit']")).click();
     driver.findElement(By.xpath("//div[@id='loginPopup']/div/div/div/div/span/a/span/span")).click();
+    Regisrtation("1234", "demo@test.ru");
+  }
+
+  private void Regisrtation(String password, String userName) {
     driver.findElement(By.xpath("//form[@id='RegistrationFormView']/ul/li/label/span")).click();
     driver.findElement(By.name("email")).click();
-    // ERROR: Caught exception [ERROR: Unsupported command [doubleClick | name=email | ]]
+    driver.findElement(By.name("email")).clear();
+    driver.findElement(By.name("email")).sendKeys(userName);
     driver.findElement(By.xpath("//form[@id='RegistrationFormView']/div/div[2]")).click();
     driver.findElement(By.name("password")).click();
     driver.findElement(By.name("password")).clear();
-    driver.findElement(By.name("password")).sendKeys("1234");
+    driver.findElement(By.name("password")).sendKeys(password);
     driver.findElement(By.id("reg_captcha")).click();
     driver.findElement(By.id("reg_captcha")).clear();
     driver.findElement(By.id("reg_captcha")).sendKeys("trhr");
